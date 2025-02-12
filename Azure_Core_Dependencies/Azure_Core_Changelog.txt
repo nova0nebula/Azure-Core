@@ -1,0 +1,10 @@
+Version 1.0.0
+Build 1000
+Released on 12 February 2025
+- Initial release with basic functionality.
+
+Version 1.1.0
+Build 1001
+Released on 12 February 2025
+- Added 'version' & '--version' command to see Azure Core current version.
+- Added 'changelog' command to see the full Azure Core changelog.
