@@ -19,12 +19,13 @@ import string
 from difflib import get_close_matches
 
 # Variables
-commands = ["Restart-Computer", "help", "Shutdown-Computer","version","--version","clear","list-modules"]
+commands = ["Restart-Computer", "help", "Shutdown-Computer","version","--version","clear","list-modules","system","changelog"]
 dash = "-" * 70
 username = getpass.getuser()
 cwd = os.getcwd()
 system_name = platform.system()
 VERSION_FILE = "Azure_Core_Dependencies/Azure_Core_Version.txt"
+CHANGELOG_FILE = "Azure_Core_Dependencies/Azure_Core_Changelog.txt"
 
 # Ascii Art
 azure_command_ascii = '''
@@ -48,22 +49,36 @@ def print_invalid_prefix(prefix):
 def get_azure_version():
   """ Displays Azure Core version, system info, and Python version """
   if os.path.exists(VERSION_FILE):
-      with open(VERSION_FILE, "r") as f:
-          azure_core_version =  f.read().strip()
+    with open(VERSION_FILE, "r") as file:
+      for line in file:
+        line = line.strip()
+        if line.startswith("Version"):
+          version = "Azure Core "+line.split(" =~-$=-~= ")[1]
+        elif line.startswith("Build"):
+          build_info = "Build "+line.split(" =~-$=-~= ")[1]
+        elif line.startswith("Released"):
+          release_date = line.split(" =~-$=-~= ")[1]
   else:
-    azure_core_version = "Azure Core v1.0.0\nBuild "
-  build_info = "Build 1024 (Stable)"
-  release_date = "February 2025"
+    version = "Azure Core v1.0.0"
+    build_info = "Build 1000 (Stable)"
+    release_date = "February 2025"
 
-  print(f"\n{Fore.YELLOW}Azure Core Information:{Fore.RESET}")
-  print(f"{Fore.CYAN}{azure_core_version}{Fore.RESET}")
+  print(f"{Fore.CYAN}{version}{Fore.RESET}")
   print(f"{Fore.GREEN}{build_info}{Fore.RESET}")
   print(f"{Fore.MAGENTA}Released on: {release_date}{Fore.RESET}")
 
-  # Show OS and Python version
-  print(f"\n{Fore.YELLOW}System Information:{Fore.RESET}")
-  print(f"{Fore.CYAN}OS: {platform.system()} {platform.release()}{Fore.RESET}")
-  print(f"{Fore.GREEN}Python Version: {sys.version.split()[0]}{Fore.RESET}")
+
+def get_azure_core_changelog(prompt):
+  try:
+    with open(CHANGELOG_FILE, "r") as file:
+      changelog = file.read()
+      print(changelog)
+  except PermissionError:
+    print_permission_error(prompt)
+  except FileNotFoundError:
+    print_file_error(prompt)
+  except Exception as e:
+    print(f"{Fore.RED}Unexpected error: {e}{Fore.WHITE}")
 
 
 def print_error(command):
@@ -153,6 +168,12 @@ def handle_azure_core_commands(action,prompt):
         print("Module not yet implemented.")
       elif action == "list-modules":
         print("Module not yet implemented.")
+      elif action == "system":
+        print(f"{Fore.CYAN}Username: {username}{Fore.WHITE}")
+        print(f"{Fore.GREEN}Cwd: {cwd}{Fore.WHITE}")
+        print(f"{Fore.MAGENTA}Platform: {system_name} {platform.release()}{Fore.WHITE}")
+      elif action == "changelog":
+        get_azure_core_changelog(prompt)
     except PermissionError:
       print_permission_error(prompt)
     except FileNotFoundError:
