@@ -13,3 +13,8 @@ Version 1.2.0
 Build 1002
 Released on 13 February 2025
 - Added 'checkupdates' command for users to check if there are any new updates and update their system on the spot.
+
+Version 1.2.1
+Build 1003
+Released on 13 February 2025
+- Fixed exit message saying "Exiting Azure Command" instead of "Exiting Azure Core".
