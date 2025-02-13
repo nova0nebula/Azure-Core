@@ -224,7 +224,7 @@ def handle_azure_core_commands(action,prompt):
       elif action == "Restart-Computer":
         azure_core_main()
       elif action == "Shutdown-Computer":
-        print(f"{Fore.GREEN}Exiting Azure Command...{Fore.WHITE}")
+        print(f"{Fore.GREEN}Exiting Azure Core...{Fore.WHITE}")
         sys.exit()
       elif action == "clear":
         azure_core_main()
