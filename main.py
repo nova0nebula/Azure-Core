@@ -25,6 +25,7 @@ username = getpass.getuser()
 cwd = os.getcwd()
 system_name = platform.system()
 GITHUB_VERSION_URL = "https://raw.githubusercontent.com/nova0nebula/Azure-Core/main/Azure_Core_Dependencies/Azure_Core_Version.txt"
+GITHUB_URL = "https://github.com/nova0nebula/Azure-Core.git"
 VERSION_FILE = "Azure_Core_Dependencies/Azure_Core_Version.txt"
 CHANGELOG_FILE = "Azure_Core_Dependencies/Azure_Core_Changelog.txt"
 
@@ -51,6 +52,34 @@ def parse_version_data(data):
       version_info[key.strip()] = value.strip()
   return version_info
 
+def git_update():
+  temp_dir = os.path.join(os.getcwd(), "Azure-Core")
+
+  if os.path.exists(temp_dir):
+      shutil.rmtree(temp_dir)
+
+  try:
+      print("[INFO] Cloning the latest version...")
+      subprocess.run(["git", "clone", GITHUB_URL, temp_dir], check=True)
+
+      for item in os.listdir(temp_dir):
+          source_path = os.path.join(temp_dir, item)
+          dest_path = os.path.join(os.getcwd(), item)
+
+          if os.path.isdir(source_path):
+              if os.path.exists(dest_path):
+                  shutil.rmtree(dest_path)
+              shutil.copytree(source_path, dest_path)
+          else:
+              shutil.copy2(source_path, dest_path)
+
+      print("[SUCCESS] Update complete!")
+
+  except subprocess.CalledProcessError as e:
+      print(f"[ERROR] Git update failed: {e}")
+  finally:
+      shutil.rmtree(temp_dir)
+
 def check_for_updates(prompt):
   try:
     response = requests.get(GITHUB_VERSION_URL)
@@ -58,26 +87,24 @@ def check_for_updates(prompt):
       latest_version = parse_version_data(response.text)
     else:
       print("Failed to fetch latest version.")
-      return False
+      return
     if os.path.exists(VERSION_FILE):
       with open(VERSION_FILE, "r") as file:
         local_version = parse_version_data(file.read())
     else:
       print("Local version file not found. Running update...")
-      return True
+      return
     if local_version.get("Version") != latest_version.get("Version"):
-      print("\n🔔 **Update Available!** 🔔")
+      print("🔔 **Update Available!** 🔔")
       print(f"➡ **New Version:** {latest_version['Version']}")
       print(f"🔨 **Build:** {latest_version['Build']}")
       print(f"📅 **Release Date:** {latest_version['Released']}")
-      print("\n⬇ Download the latest version from GitHub!")
-      return True
+      print("⬇ Downloading the latest version from GitHub!")
+      git_update()
     else:
-      print("\n✅ You are using the latest version!")
-      return False
+      print("✅ You are using the latest version!")
   except Exception as e:
     print(f"{Fore.RED}Unexpected error: {e}{Fore.WHITE}")
-    return False
 
 def print_invalid_prefix(prefix):
   """ Handles incorrect prefixes """
