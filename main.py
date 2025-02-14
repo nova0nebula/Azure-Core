@@ -19,12 +19,12 @@ import string
 from difflib import get_close_matches
 
 # Variables
-commands = ["Restart-Computer", "help", "Shutdown-Computer","version","--version","clear","list-modules","system","changelog","checkupdates"]
+Azure_Core_Commands = ["Restart-System", "help", "Shutdown-System","version","--version","clear","list-modules","system","changelog","checkupdates"]
 dash = "-" * 70
 username = getpass.getuser()
 cwd = os.getcwd()
 system_name = platform.system()
-GITHUB_VERSION_URL = "https://raw.githubusercontent.com/nova0nebula/Azure-Core/main/Azure_Core_Dependencies/Azure_Core_Version.txt"
+GITHUB_VERSION_FILE = "https://raw.githubusercontent.com/nova0nebula/Azure-Core/main/Azure_Core_Dependencies/Azure_Core_Version.txt"
 GITHUB_URL = "https://github.com/nova0nebula/Azure-Core.git"
 VERSION_FILE = "Azure_Core_Dependencies/Azure_Core_Version.txt"
 CHANGELOG_FILE = "Azure_Core_Dependencies/Azure_Core_Changelog.txt"
@@ -61,9 +61,10 @@ def get_github_files():
       print("Error fetching GitHub repository files.")
       return []
 
-def check_for_updates(prompt):
+def check_for_updates(prompt, debug_mode):
+  debug_mode = str(debug_mode).lower()
   try:
-    response = requests.get(GITHUB_VERSION_URL)
+    response = requests.get(GITHUB_VERSION_FILE)
     if response.status_code == 200:
       latest_version = parse_version_data(response.text)
     else:
@@ -75,16 +76,26 @@ def check_for_updates(prompt):
     else:
       print("Local version file not found. Running update...")
       return
-    if local_version.get("Version") != latest_version.get("Version"):
-      print("🔔 **Update Available!** 🔔")
-      print(f"➡ **New Version:** {latest_version['Version']}")
-      print(f"🔨 **Build:** {latest_version['Build']}")
-      print(f"📅 **Release Date:** {latest_version['Released']}")
-      print("⬇ Download the latest version from GitHub!")
+    latest_version_number = latest_version.get("Version", "").strip()
+    local_version_number = local_version.get("Version", "").strip()
+    if debug_mode == "true":
+      print(f"{Fore.RED}DEBUG - Local Version: '{latest_version_number}'{Fore.RESET}")
+      print(f"{Fore.RED}DEBUG - Latest Version: '{local_version_number}'{Fore.RESET}")
+    if latest_version_number != local_version_number:
+      print(f"{Fore.RED}\033[1;4mUpdate Available!\033[0m{Fore.RESET}")
+      print(f"Current Version: {Fore.RED}{local_version_number}{Fore.RESET}")
+      print(f"Current Build: {Fore.RED}{local_version.get('Build', 'Unknown')}{Fore.RESET}")
+      print(f"Release Date: {Fore.RED}{local_version.get('Released', 'Unknown')}{Fore.RESET}\n")
+      print(f"New Version: {Fore.LIGHTGREEN_EX}{latest_version_number}{Fore.RESET}")
+      print(f"New Build: {Fore.LIGHTGREEN_EX}{latest_version.get('Build', 'Unknown')}{Fore.RESET}")
+      print(f"Release Date: {Fore.LIGHTGREEN_EX}{latest_version.get('Released', 'Unknown')}{Fore.RESET}")
+      print("Download the latest version from GitHub!")
     else:
-      print("✅ You are using the latest version!")
+      print(f"{Fore.LIGHTGREEN_EX}You are using the latest version!{Fore.RESET}")
   except Exception as e:
-    print(f"{Fore.RED}Unexpected error: {e}{Fore.WHITE}")
+      print(f"Unexpected error: {e}")
+
+
 
 def print_invalid_prefix(prefix):
   """ Handles incorrect prefixes """
@@ -152,7 +163,7 @@ def print_error(command):
         f"    {Fore.YELLOW}FullyQualifiedErrorId{Fore.RESET} : CommandNotFoundException"
     )
 
-  matches = get_close_matches(command, commands, n=1, cutoff=0.6)
+  matches = get_close_matches(command, Azure_Core_Commands, n=1, cutoff=0.6)
   if matches:
     print(f"\n{Fore.CYAN}Did you mean: {matches[0]}?{Fore.RESET}\n")
   else:
@@ -200,7 +211,7 @@ def print_file_error(command):
   )
 
 def handle_azure_core_commands(action,prompt):
-  if action in commands:
+  if action in Azure_Core_Commands:
     try:
       if action in ["version","--version"]:
         get_azure_version()
@@ -222,8 +233,7 @@ def handle_azure_core_commands(action,prompt):
       elif action == "changelog":
         get_azure_core_changelog(prompt)
       elif action == "checkupdates":
-        #check_for_updates(prompt)
-        check_for_updates(prompt)
+        check_for_updates(prompt,"false")
     except PermissionError:
       print_permission_error(prompt)
     except FileNotFoundError:

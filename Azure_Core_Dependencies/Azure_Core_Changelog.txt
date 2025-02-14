@@ -24,3 +24,8 @@ Build 1004
 Released on 14 February 2025
 - Removed automatic updating when running 'ac checkupdates'. Users now have to pull new updates from GitHub themselves.
 - Fixed previous changelog commands to say the prefix in the command.
+
+Version 1.4.0
+Build 1005
+Released on 14 February 2025
+- Made 'ac changelog' command look nicer.
