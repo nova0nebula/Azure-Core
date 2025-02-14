@@ -53,120 +53,15 @@ def parse_version_data(data):
   return version_info
 
 def get_github_files():
-  # Use GitHub API to get the list of files in the repository (e.g., Azure-Core folder)
   repo_url = "https://api.github.com/repos/nova0nebula/Azure-Core/contents"
   response = requests.get(repo_url)
   if response.status_code == 200:
-      return response.json()  # This will return a list of files
+      return response.json()
   else:
       print("Error fetching GitHub repository files.")
       return []
 
-# Function to compare local files with GitHub files
-def compare_files(local_dir, github_files):
-  local_files = {os.path.relpath(os.path.join(root, file), local_dir): file
-                 for root, dirs, files in os.walk(local_dir) for file in files}
-
-  updates_needed = []
-
-  # Compare local files with GitHub files
-  for github_file in github_files:
-      github_file_name = github_file['name']
-      github_file_url = github_file['download_url']
-
-      local_file_path = os.path.join(local_dir, github_file_name)
-
-      # If the local file doesn't exist or differs, flag it for update
-      if not os.path.exists(local_file_path) or not compare_file_content(local_file_path, github_file_url):
-          updates_needed.append((github_file_name, github_file_url))
-
-  return updates_needed
-
-# Function to compare the content of the local and GitHub file
-def compare_file_content(local_file_path, github_file_url):
-  try:
-      # Download the GitHub file
-      response = requests.get(github_file_url)
-      if response.status_code == 200:
-          github_file_content = response.content
-          with open(local_file_path, 'rb') as f:
-              local_file_content = f.read()
-          return github_file_content == local_file_content
-      else:
-          print(f"Failed to fetch file from GitHub: {github_file_url}")
-          return False
-  except Exception as e:
-      print(f"Error comparing file {local_file_path}: {e}")
-      return False
-
-# Function to update the files from GitHub to the local system
-def update_files(updates_needed, local_dir):
-  for file_name, github_file_url in updates_needed:
-      print(f"Updating {file_name}...")
-      response = requests.get(github_file_url)
-      if response.status_code == 200:
-          with open(os.path.join(local_dir, file_name), 'wb') as f:
-              f.write(response.content)
-      else:
-          print(f"Failed to download {file_name} from GitHub.")
-
-
 def check_for_updates(prompt):
-  try:
-      # Step 1: Get the latest version data from GitHub
-      response = requests.get(GITHUB_VERSION_URL)
-      if response.status_code == 200:
-          latest_version = parse_version_data(response.text)
-      else:
-          print("Failed to fetch latest version.")
-          return
-
-      # Step 2: Get the local version file and compare
-      if os.path.exists(VERSION_FILE):
-          with open(VERSION_FILE, "r") as file:
-              local_version = parse_version_data(file.read())
-      else:
-          print("Local version file not found. Running update...")
-          return
-
-      if local_version.get("Version") != latest_version.get("Version"):
-          print("🔔 **Update Available!** 🔔")
-          print(f"➡ **New Version:** {latest_version['Version']}")
-          print(f"🔨 **Build:** {latest_version['Build']}")
-          print(f"📅 **Release Date:** {latest_version['Released']}")
-          print("⬇ Downloading the latest version from GitHub!")
-
-          # Proceed to update the files
-          update_files_from_github(cwd)
-      else:
-          print("✅ You are using the latest version!")
-
-  except Exception as e:
-      print(f"{Fore.RED}Unexpected error: {e}{Fore.WHITE}")
-
-def update_files_from_github(local_dir):
-  try:
-      # Get the list of files from GitHub repository
-      github_files = get_github_files()
-
-      if not github_files:
-          print("No files found on GitHub or failed to fetch them.")
-          return
-
-      # Compare local files with GitHub files
-      updates_needed = compare_files(local_dir, github_files)
-
-      if updates_needed:
-          print(f"🔔 Found {len(updates_needed)} file(s) that need updates.")
-          update_files(updates_needed, local_dir)
-          print("⬇ Files have been updated!")
-      else:
-          print("✅ All files are up to date!")
-
-  except Exception as e:
-      print(f"{Fore.RED}Error during file update: {e}{Fore.WHITE}")
-  
-#def check_for_updates(prompt):
   try:
     response = requests.get(GITHUB_VERSION_URL)
     if response.status_code == 200:
@@ -185,8 +80,7 @@ def update_files_from_github(local_dir):
       print(f"➡ **New Version:** {latest_version['Version']}")
       print(f"🔨 **Build:** {latest_version['Build']}")
       print(f"📅 **Release Date:** {latest_version['Released']}")
-      print("⬇ Downloading the latest version from GitHub!")
-      git_update()
+      print("⬇ Download the latest version from GitHub!")
     else:
       print("✅ You are using the latest version!")
   except Exception as e:
@@ -198,6 +92,9 @@ def print_invalid_prefix(prefix):
 
 def get_azure_version():
   """ Displays Azure Core version, system info, and Python version """
+  version = ""
+  build_info = ""
+  release_date = ""
   if os.path.exists(VERSION_FILE):
     with open(VERSION_FILE, "r") as file:
       for line in file:
