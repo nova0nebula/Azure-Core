@@ -29,3 +29,9 @@ Version 1.4.0
 Build 1005
 Released on 14 February 2025
 - Made 'ac changelog' command look nicer.
+
+Version 1.4.1
+Build 1006
+Released on 17 February 2025
+- Fixed [README.md](README.md) contributer section to link to the respective contributers social media.
+- Added what each contributer contributed.
