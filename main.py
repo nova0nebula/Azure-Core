@@ -20,6 +20,7 @@ from difflib import get_close_matches
 
 # Variables
 Azure_Core_Commands = ["Restart-System", "help", "Shutdown-System","version","--version","clear","list-modules","system","changelog","checkupdates"]
+prefixes = {"ac":"Azure Core","sq":"Subject Quizzer","-p":"Prefix"}
 dash = "-" * 70
 username = getpass.getuser()
 cwd = os.getcwd()
@@ -99,7 +100,7 @@ def check_for_updates(prompt, debug_mode):
 
 def print_invalid_prefix(prefix):
   """ Handles incorrect prefixes """
-  print(f"{Fore.RED}Error: '{prefix}' is not a recognized system. Use 'ac' for Azure Core commands.{Fore.RESET}")
+  print(f"{Fore.RED}Error: '{prefix}' is not a recognized system. Use '\033[4m-p help\033[0m{Fore.RED}' for prefix help.{Fore.RESET}")
 
 def get_azure_version():
   """ Displays Azure Core version, system info, and Python version """
@@ -255,10 +256,17 @@ def azure_core_main():
       continue
     prefix = parts[0].lower()
     action = " ".join(parts[1:])
-    if prefix == "ac":
-      handle_azure_core_commands(action,prompt)
-    elif prefix == "sq":
-      print(f"{Fore.YELLOW}Subject Quizzer system is not implemented yet!{Fore.WHITE}")
+    if prefix in prefixes:
+      if prefix == "ac":
+        handle_azure_core_commands(action,prompt)
+      elif prefix == "sq":
+        print(f"{Fore.YELLOW}Subject Quizzer system is not implemented yet!{Fore.WHITE}")
+      elif prefix == "-p":
+        if action == "help":
+          print("\033[1;4mPrefix Help Menu\033[0m")
+          print("Available Prefixes:")
+          key = list(prefixes.keys())[0]
+          print(f"{Fore.CYAN}{key}{Fore.WHITE}")
     else:
       print_invalid_prefix(prefix)
 

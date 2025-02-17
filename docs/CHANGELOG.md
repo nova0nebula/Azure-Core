@@ -29,6 +29,6 @@ Released on 14 February 2025<br>
 - Fixed previous changelog commands to say the prefix in the command.
 
 ## Version 1.4.0
-Build __1005__<br>
-Released on __14 February 2025__<br>
+Build 1005<br>
+Released on 14 February 2025<br>
 - Made 'ac changelog' command look nicer.
