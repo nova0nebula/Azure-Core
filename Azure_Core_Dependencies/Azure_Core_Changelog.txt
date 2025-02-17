@@ -41,3 +41,8 @@ Build 1007
 Released on 17 February 2025
 - Added 'ac sysinfo', 'ac ls', 'ac tasklist', 'ac ipconfig', 'ac help' & '-p help' commands.
 - Made 'ac sysinfo' command nicer looking.
+
+Version 1.5.1
+Build 1008
+Released on 17 February 2025
+- Made [CHANGELOG.md](CHANGELOG.md) file commands look nicer.
