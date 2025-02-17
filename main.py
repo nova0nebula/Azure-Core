@@ -289,9 +289,9 @@ def handle_azure_core_commands(action, prompt):
     try:
       if action in ["version", "--version"]:
         get_azure_version()
-      elif action == "Restart-Computer":
+      elif action == "Restart-System":
         azure_core_main()
-      elif action == "Shutdown-Computer":
+      elif action == "Shutdown-System":
         print(f"{Fore.GREEN}Exiting Azure Core...{Fore.RESET}")
         sys.exit()
       elif action == "clear":
@@ -353,7 +353,7 @@ def azure_core_main():
     parts = prompt.split()
     if not parts:
       continue
-    prefix = parts[0].lower()
+    prefix = parts[0]
     action = " ".join(parts[1:])
     if prefix in prefixes:
       if prefix == "ac":

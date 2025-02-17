@@ -49,3 +49,8 @@ Released on 17 February 2025<br>
 Build 1008<br>
 Released on 17 February 2025<br>
 - Made [CHANGELOG.md](CHANGELOG.md) file commands look nicer.
+
+## Version 1.5.2
+Build 1009<br>
+Released on 18 February 2025<br>
+- Fixed `'ac Restart-System'` & `'ac Shutdown-System'` not working.
