@@ -51,3 +51,8 @@ Version 1.5.2
 Build 1009
 Released on 18 February 2025
 - Fixed 'ac Restart-System' & 'ac Shutdown-System' not working.
+
+Version 1.5.3
+Build 1010
+Released on 19 February 2025
+- Fixed dash not printing correctly for some IDE's.

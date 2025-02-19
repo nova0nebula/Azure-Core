@@ -12,6 +12,8 @@ import shutil
 import getpass
 import datetime
 import socket
+import flask
+from flask import Flask, render_template, jsonify
 import traceback
 import requests
 import inspect
@@ -36,7 +38,6 @@ azure_core_commands = {
 }
 prefix_colours = {"ac": Fore.CYAN, "sq": Fore.YELLOW, "-p": Fore.MAGENTA}
 prefixes = {"ac": "Azure Core", "sq": "Subject Quizzer", "-p": "Prefix"}
-dash = "-" * os.get_terminal_size().columns
 username = getpass.getuser()
 cwd = os.getcwd()
 system_name = platform.system()
@@ -45,6 +46,10 @@ GITHUB_VERSION_FILE = "https://raw.githubusercontent.com/nova0nebula/Azure-Core/
 GITHUB_URL = "https://github.com/nova0nebula/Azure-Core.git"
 VERSION_FILE = "Azure_Core_Dependencies/Azure_Core_Version.txt"
 CHANGELOG_FILE = "Azure_Core_Dependencies/Azure_Core_Changelog.txt"
+try:
+  dash = "-" * os.get_terminal_size().columns
+except:
+  dash = "-" * 50
 
 # Ascii Art
 azure_command_ascii = '''
@@ -52,6 +57,14 @@ azure_command_ascii = '''
                 ╠═╣┌─┘│ │├┬┘├┤   ║  │ │││││││├─┤│││ ││
                 ╩ ╩└─┘└─┘┴└─└─┘  ╚═╝└─┘┴ ┴┴ ┴┴ ┴┘└┘─┴┘
 '''
+
+# Function - get_user_country()
+def get_user_country():
+  try:
+    response = requests.get("https://ipinfo.io/json").json()
+    return response.get("country", "Unknown")
+  except:
+    return "Unknown"
 
 
 # Function - clear_screen()
