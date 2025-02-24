@@ -56,3 +56,13 @@ Version 1.5.3
 Build 1010
 Released on 19 February 2025
 - Fixed dash not printing correctly for some IDE's.
+
+Version 1.5.4
+Build 1011
+Released on 24 February 2025
+- Made program be able to detect more wrong inputs with error outputs.
+
+Version 1.5.5
+Build 1012
+Released on 24 February 2025
+- Made [CHANGELOG.md](CHANGELOG.md) look nicer

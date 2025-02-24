@@ -38,37 +38,29 @@ azure_core_commands = {
 }
 prefix_colours = {"ac": Fore.CYAN, "sq": Fore.YELLOW, "-p": Fore.MAGENTA}
 prefixes = {"ac": "Azure Core", "sq": "Subject Quizzer", "-p": "Prefix"}
-username = getpass.getuser()
-cwd = os.getcwd()
-system_name = platform.system()
+username: str = getpass.getuser()
+cwd: str = os.getcwd()
+system_name: str = platform.system()
 uname = platform.uname()
-GITHUB_VERSION_FILE = "https://raw.githubusercontent.com/nova0nebula/Azure-Core/main/Azure_Core_Dependencies/Azure_Core_Version.txt"
-GITHUB_URL = "https://github.com/nova0nebula/Azure-Core.git"
-VERSION_FILE = "Azure_Core_Dependencies/Azure_Core_Version.txt"
-CHANGELOG_FILE = "Azure_Core_Dependencies/Azure_Core_Changelog.txt"
+GITHUB_VERSION_FILE: str = "https://raw.githubusercontent.com/nova0nebula/Azure-Core/main/Azure_Core_Dependencies/Azure_Core_Version.txt"
+GITHUB_URL: str = "https://github.com/nova0nebula/Azure-Core.git"
+VERSION_FILE: str = "Azure_Core_Dependencies/Azure_Core_Version.txt"
+CHANGELOG_FILE: str = "Azure_Core_Dependencies/Azure_Core_Changelog.txt"
 try:
-  dash = "-" * os.get_terminal_size().columns
+  dash: str = "-" * os.get_terminal_size().columns
 except:
-  dash = "-" * 50
+  dash: str = "-" * 50
 
 # Ascii Art
-azure_command_ascii = '''
+azure_command_ascii: str = '''
                 ╔═╗┌─┐┬ ┬┬─┐┌─┐  ╔═╗┌─┐┌┬┐┌┬┐┌─┐┌┐┌┌┬┐
                 ╠═╣┌─┘│ │├┬┘├┤   ║  │ │││││││├─┤│││ ││
                 ╩ ╩└─┘└─┘┴└─└─┘  ╚═╝└─┘┴ ┴┴ ┴┴ ┴┘└┘─┴┘
 '''
 
-# Function - get_user_country()
-def get_user_country():
-  try:
-    response = requests.get("https://ipinfo.io/json").json()
-    return response.get("country", "Unknown")
-  except:
-    return "Unknown"
-
 
 # Function - clear_screen()
-def clear_screen():
+def clear_screen() -> None:
   try:
     if sys.stdout.isatty():  # Check if running in a terminal
       if platform.system() == "Windows":
@@ -82,7 +74,7 @@ def clear_screen():
 
 
 # Function - parse_version_data(data)
-def parse_version_data(data):
+def parse_version_data(data: str):
   version_info = {}
   for line in data.splitlines():
     if " =~-$=-~= " in line:
@@ -93,7 +85,7 @@ def parse_version_data(data):
 
 # Function - get_github_files()
 def get_github_files():
-  repo_url = "https://api.github.com/repos/nova0nebula/Azure-Core/contents"
+  repo_url: str = "https://api.github.com/repos/nova0nebula/Azure-Core/contents"
   response = requests.get(repo_url)
   if response.status_code == 200:
     return response.json()
@@ -103,8 +95,7 @@ def get_github_files():
 
 
 # Function - check_for_updates(prompt, debug_mode)
-def check_for_updates(prompt, debug_mode):
-  debug_mode = str(debug_mode).lower()
+def check_for_updates(prompt: str, debug_mode: str):
   try:
     response = requests.get(GITHUB_VERSION_FILE)
     if response.status_code == 200:
@@ -154,7 +145,7 @@ def check_for_updates(prompt, debug_mode):
 
 
 # Function - print_invalid_prefix(prefix)
-def print_invalid_prefix(prefix):
+def print_invalid_prefix(prefix: str):
   """ Handles incorrect prefixes """
   print(
       f"{Fore.RED}Error: '{prefix}' is not a recognized system. Use '\033[4m-p help\033[0m{Fore.RED}' for prefix help.{Fore.RESET}"
@@ -164,9 +155,9 @@ def print_invalid_prefix(prefix):
 # Function - get_azure_version()
 def get_azure_version():
   """ Displays Azure Core version, system info, and Python version """
-  version = ""
-  build_info = ""
-  release_date = ""
+  version: str = ""
+  build_info: str = ""
+  release_date: str = ""
   if os.path.exists(VERSION_FILE):
     with open(VERSION_FILE, "r") as file:
       for line in file:
@@ -178,9 +169,9 @@ def get_azure_version():
         elif line.startswith("Released"):
           release_date = line.split(" =~-$=-~= ")[1]
   else:
-    version = "Azure Core v1.0.0"
-    build_info = "Build 1000 (Stable)"
-    release_date = "February 2025"
+    version: str = "Azure Core v1.0.0"
+    build_info: str = "Build 1000 (Stable)"
+    release_date: str = "February 2025"
 
   print(f"{Fore.CYAN}{version}{Fore.RESET}")
   print(f"{Fore.GREEN}{build_info}{Fore.RESET}")
@@ -188,7 +179,7 @@ def get_azure_version():
 
 
 # Function - get_azure_core_changelog(prompt)
-def get_azure_core_changelog(prompt):
+def get_azure_core_changelog(prompt: str):
   try:
     print(dash)
     with open(CHANGELOG_FILE, "r") as file:
@@ -204,7 +195,7 @@ def get_azure_core_changelog(prompt):
 
 
 # Function - azure_core_help_screen(prompt)
-def azure_core_help_screen(prompt):
+def azure_core_help_screen(prompt: str):
   print("\033[1;4mAzure Core Help Screen\033[0m\nAvailable Commands:\n")
   for command, usage in azure_core_commands.items():
     length = 22 - len(command)
@@ -213,7 +204,7 @@ def azure_core_help_screen(prompt):
 
 
 # Function - print_error(command)
-def print_error(command):
+def print_error(command: str):
   """ Prints a PowerShell-style error message with suggestions """
   try:
     raise OSError(
@@ -222,8 +213,8 @@ def print_error(command):
   except OSError as e:
     tb = traceback.extract_tb(e.__traceback__)
     filename, lineno, funcname, text = tb[-1]
-    error_line = lineno
-    error_char = len(command)
+    error_line: int = lineno
+    error_char: int = len(command)
     print(
         f"\n{Fore.RED}Azure Core : The term '{command}' is not recognized as a command.{Fore.RESET}"
     )
@@ -245,7 +236,7 @@ def print_error(command):
 
 
 # Function - print_permission_error(prompt)
-def print_permission_error(command):
+def print_permission_error(command: str):
   """ Prints a PowerShell-style permission error """
   try:
     raise PermissionError(
@@ -254,8 +245,8 @@ def print_permission_error(command):
   except PermissionError as e:
     tb = traceback.extract_tb(e.__traceback__)
     filename, lineno, funcname, text = tb[-1]
-    error_line = lineno
-    error_char = len(command)
+    error_line: int = lineno
+    error_char: int = len(command)
   print(
       f"\n{Fore.RED}Azure Core : Access denied. You do not have permission to run '{command}'.{Fore.RESET}"
   )
@@ -271,7 +262,7 @@ def print_permission_error(command):
 
 
 # Function - print_file_error(command)
-def print_file_error(command):
+def print_file_error(command: str):
   """ Prints a PowerShell-style file error """
   try:
     raise FileNotFoundError(
@@ -280,8 +271,8 @@ def print_file_error(command):
   except FileNotFoundError as e:
     tb = traceback.extract_tb(e.__traceback__)
     filename, lineno, funcname, text = tb[-1]
-    error_line = lineno
-    error_char = len(command)
+    error_line: int = lineno
+    error_char: int = len(command)
   print(
       f"\n{Fore.RED}Azure Core : The system cannot find the file specified: '{command}'.{Fore.RESET}"
   )
@@ -297,7 +288,7 @@ def print_file_error(command):
 
 
 # Function - handle_azure_core_commands(actions, prompt)
-def handle_azure_core_commands(action, prompt):
+def handle_azure_core_commands(action: str, prompt: str):
   if action in azure_core_commands:
     try:
       if action in ["version", "--version"]:
@@ -359,15 +350,15 @@ def azure_core_main():
   print("\033[1;4mAzure Core\033[0m")
   print("Copyright (C) Azure Command. All rights reserved.\n")
   while True:
-    prompt = str(
+    prompt: str = str(
         input(
             f"{Fore.CYAN}AC{Fore.RESET} C:\\{Fore.LIGHTYELLOW_EX}Users{Fore.RESET}\\{username}> "
         ))
-    parts = prompt.split()
+    parts: list = prompt.split()
     if not parts:
       continue
-    prefix = parts[0]
-    action = " ".join(parts[1:])
+    prefix: str = parts[0]
+    action: str = " ".join(parts[1:])
     if prefix in prefixes:
       if prefix == "ac":
         handle_azure_core_commands(action, prompt)
@@ -379,8 +370,8 @@ def azure_core_main():
         if action == "help":
           print("\033[1;4mPrefix Help Menu\033[0m")
           for key, value in prefixes.items():
-            colour = prefix_colours.get(key, Fore.RESET)
-            length = 25 - len(key)
+            colour: str = prefix_colours.get(key, Fore.RESET)
+            length: int = 25 - len(key)
             print(f"{colour}{key}" + (" " * length) +
                   f"{colour}- {value}{Fore.RESET}")
     else:
