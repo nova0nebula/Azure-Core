@@ -1,0 +1,10 @@
+requests
+colorama
+discord
+numpy
+pytest
+pytest-cov
+click
+tqdm
+pytz
+arrow
