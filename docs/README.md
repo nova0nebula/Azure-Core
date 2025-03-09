@@ -14,12 +14,13 @@ Whether you're a beginner looking to learn or an experienced developer looking f
 ---
 
 ### 🌐 **Modules**
-Azure Core consists of several modules, each focused on a specific type of resource or functionality. Below are the main modules in Azure Core:
+Azure Core consists of several modules, each focused on a specific type of resource or functionality. Below are a few modules in Azure Core:
 
 1. **Programming Solutions**: A variety of coding solutions in languages like Python, JavaScript, C++, and more.
 2. **Programming Guides**: In-depth tutorials and best practices for popular programming languages and tools.
 3. **School Notes**: A collection of study materials and notes for different school subjects.
-4. **Contributions**: Contribute your own solutions, guides, or educational materials to Ventura.
+4. **Contributions**: Contribute your own solutions, guides, or educational materials to Azure Core.
+5. **Azure Terminal**: A custom modular terminal.
 
 ---
 
