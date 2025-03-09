@@ -57,7 +57,7 @@ def list_directory(path=".", detailed=False):
 
 # Main System Function
 def execute_ls(prompt):
-    parts: list = prompt.split()
+    parts: list = prompt.split(" ")
     detailed = "-l" in parts
 
     if len(parts) > 1 and parts[-1] != "-l":

@@ -4,14 +4,22 @@ All notable changes to Azure Terminal will be documented in this file. This proj
 
 ---
 
-## [Unreleased] - 26/2/2025 - Build #0
+## [Unreleased] - 26/02/2025 - Build #0
 ### Added
 - Basic structure for Azure Terminal.
 
-## v0.0.1 - 27/2/2025 - Build #1
+## v0.0.1 - 27/02/2025 - Build #1
 ### Added
 - Basic system commands like `ls` & `quit`.
 - Custom modules can now be added modularity.
+
+## v0.1.0 - 09/03/2025 - Build #2
+### Added
+- System command, `clear`, to clear terminal screen.
+- Rounding off capability in `math` custom module.
+- `config` folder for all of Azure Terminal user configuration.
+### Bug Fix
+- Fixed system and module commands not working when having spaces in input.
 
 ---
 

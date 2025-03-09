@@ -13,17 +13,17 @@
 ## 🎮 Usage
 To start Azure Terminal, run:
 ```sh
-./azure-terminal
+./azure_terminal/core/main.py
 ```
 
 ## 🎨 Customization
 You can modify the appearance and commands by editing the configuration files inside the `config/` folder.
 
 ## 🤝 Contributing
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed contributing instructions.
+See [CONTRIBUTING.md](../../docs/CONTRIBUTING.md) for detailed contributing instructions.
 
 ## 📜 Licence
-This project is licenced under the [MIT Licence](LICENSE.md).
+This project is licenced under the [MIT LICENSE](../../docs/LICENSE.md).
 
 ## 🎖️ Creator & Contributors
 <ins>**Creator**</ins> - [@nova0nebula](https://github.com/nova0nebula)<br><br>
