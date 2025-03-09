@@ -10,7 +10,6 @@ All notable changes to this project will be documented in this file. This projec
 - Basic structure for Azure Terminal.
 - Basic structure for multiple programming language modules.
 - Placeholder guides and solutions for Python and JavaScript.
-
 ### Changed
 - Improved folder structure for better scalability.
 - Initial setup of the project documentation.
