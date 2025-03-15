@@ -31,5 +31,5 @@ Notes:
         print(help_message)
         return
     else:
-        print(f"{output_colour}Quitting...{Colour.RESET}")
+        print(f"{output_colour}Exiting Azure Terminal...{Colour.RESET}")
         exit()
