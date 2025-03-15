@@ -1,4 +1,10 @@
-# Main Function for mathematical operations
+# System Library Importing
+from system_library import Colour
+
+# Config Importing
+from azure_terminal.config.config_handler import prompt_colour, output_colour
+
+# Custom Module Execution
 def execute_math(prompt):
     # Remove 'math ' prefix from the prompt
     prompt_with_no_math: str = prompt.removeprefix("math ")
@@ -6,9 +12,35 @@ def execute_math(prompt):
     # Split the prompt into parts (should separate by space, but can be customized for more complex expressions)
     parts: list = prompt_with_no_math.split(" ")
     parts_length: int = len(parts)
+    
+    if parts[-1] in ["help","-help"]:
+        help_message = f"""─────────────────────────────────────
+        Azure Terminal - Help
+─────────────────────────────────────
+Command: math
+Usage  : math <operand1> <operator> <operand2> <precision>
+Purpose: Performs mathematical operations using two operands.
 
-    # Check if we have a valid input with enough parts for an operation
-    if parts_length < 4:
+Description:
+  The 'math' command performs a basic arithmetic operation between two operands.
+  It supports addition (+), subtraction (-), multiplication (*), division (/), and modulo (%).
+  You can specify the precision for the result, or use '-' for no rounding.
+
+Example:
+  {prompt_colour}azure-core${Colour.RESET} math 10 + 5 2
+  {output_colour}Result: 10 + 5 2 = 15.0{Colour.RESET}
+
+Notes:
+  - The operands can be any numbers (positive or negative).
+  - Supported operators are +, -, *, /, and %.
+  - The precision can be a positive integer or '-' for no rounding.
+  - If dividing, make sure the second operand is not zero.
+  - If no precision is given, the result will be shown as a float with full precision.
+
+─────────────────────────────────────"""
+        print(help_message)
+        return
+    elif parts_length < 4:  # Check if we have a valid input with enough parts for an operation
         print("Error: Invalid math operation. Format should be 'math <operand1> <operator> <operand2> <precision>'")
         return
 
@@ -43,4 +75,4 @@ def execute_math(prompt):
         result: float = round(result, precision)
 
     # Output the result
-    print(f"Result: {operand1} {operator} {operand2} = {result}")
+    print(f"{output_colour}Result: {operand1} {operator} {operand2} {precision} = {result}{Colour.RESET}")

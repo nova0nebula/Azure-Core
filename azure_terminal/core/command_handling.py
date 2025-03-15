@@ -1,13 +1,10 @@
-# Python Importing
-#from colorama import Fore
+# System Library Importing
+from system_library import Format, Colour
 
 # Local Importing
 from azure_terminal.core.system_modules_importing import system_command_to_function_name
 from azure_terminal.core.custom_modules_importing import custom_module_command_to_function_name
-
-# System Library Importing
-from system_library import Format
-from system_library.ChromaFlux import Colour
+from azure_terminal.config.config_handler import error_colour, error_underline
 
 # Executing commands
 def execute_command(prompt: str):
@@ -22,4 +19,4 @@ def execute_command(prompt: str):
         execute_custom_module_function = custom_module_command_to_function_name[command_name]
         execute_custom_module_function(prompt)  # Call the corresponding custom module function
     else:
-        print(f"{Colour.RED}Unknown command: {Format.underline(prompt)}{Colour.RESET}")
+        print(f"{error_colour}Unknown command: {Format.underline(prompt) if error_underline else prompt}{Colour.RESET}")

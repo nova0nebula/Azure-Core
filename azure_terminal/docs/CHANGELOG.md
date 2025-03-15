@@ -21,9 +21,17 @@ All notable changes to Azure Terminal will be documented in this file. This proj
 ### Bug Fix
 - Fixed system and module commands not working when having spaces in input.
 
-## V0.1.1 - 15/03/2025 - Build #3
+## v0.1.1 - 15/03/2025 - Build #3
 ### Added
 - `system_library` for all custom libraries in Azure Core
+
+## v0.2.0 - 15/03/2025 - Build#4
+### Added
+- `appearance.json` for user config.
+- `-a`, `-h` and multiple command options handling for `ls` system command.
+- Help screen for all system commands and custom modules.
+### Changed
+- Updated all system commands and custom modules to implement user config in output.
 
 ---
 

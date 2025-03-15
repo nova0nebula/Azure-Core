@@ -1,0 +1,6 @@
+{
+  "prompt_colour": "YELLOW",
+  "error_colour": "RED",
+  "error_underline": "TRUE",
+  "output_colour": "RESET"
+}
