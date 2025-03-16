@@ -14,7 +14,6 @@ These are the ongoing and upcoming tasks that Azure Core aims to accomplish:
 #### 📚 **Documentation & Tutorials**
 - **Comprehensive Language Guides**: Add detailed guides for popular programming languages such as Java, C++, and Swift.
 - **Coding Best Practices**: Create documentation on best practices for various programming languages and project structures.
-- **Interactive Tutorials**: Develop interactive, hands-on tutorials that help users learn through practice.
 - **User Documentation**: Enhance the documentation for both users and developers contributing to the project.
 
 ---
