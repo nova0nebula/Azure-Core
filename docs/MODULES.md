@@ -15,17 +15,12 @@ The following is a list of Azure Core modules, each representing a distinct sect
 - Provides comprehensive guides, tutorials, and resources for learning programming languages and technologies.
 - **Example:** How to start with Python, Understanding JavaScript closures, Algorithms 101.
 
-#### 3️⃣ **School Notes**
-- A collection of school notes and study materials for various subjects.
-- Includes notes on subjects like Math, Science, History, and more, aimed at helping students.
-- **Example:** Calculus notes, Physics laws, History timelines.
-
-#### 4️⃣ **General Knowledge**
+#### 3️⃣ **General Knowledge**
 - Non-programming related knowledge to expand your general learning.
 - Covers topics in technology, culture, hobbies, and more.
 - **Example:** Latest tech trends, Culture and history, How to build your own PC.
 
-#### 5️⃣ **Contributions**
+#### 4️⃣ **Contributions**
 - This module allows contributors to easily add new solutions, guides, and other materials to the project.
 - Follow the instructions in [CONTRIBUTING.md](CONTRIBUTING.md) to contribute to Azure Core.
 
