@@ -1,5 +1,5 @@
 ![azure_core_banner.png](../assets/azure_core_banner.png)
-Azure Core is an open-source project designed to provide programming solutions, educational resources, and tools for learners and developers. It offers various modules that help people learn, code, and collaborate, featuring tutorials, coding challenges, small programs, and guides in different programming languages.
+Azure Core is an open-source project that serves as a comprehensive hub, encompassing a diverse range of tools, resources, and solutions across various domains. It is designed to be an all-in-one platform, offering innovation, flexibility, and accessibility for developers, researchers, and technology enthusiasts.
 
 Whether you're a beginner looking to learn or an experienced developer looking for solutions, Azure Core has something for everyone.
 
@@ -9,7 +9,6 @@ Whether you're a beginner looking to learn or an experienced developer looking f
 - **Programming Solutions**: Solutions and small programs in multiple programming languages.
 - **Learning Guides**: Tutorials and educational resources for a variety of programming languages.
 - **Coding Challenges**: Solve coding challenges and test your knowledge.
-- **School Notes**: Educational materials for school subjects like Math, Science, History, and more.
 
 ---
 
@@ -18,9 +17,8 @@ Azure Core consists of several modules, each focused on a specific type of resou
 
 1. **Programming Solutions**: A variety of coding solutions in languages like Python, JavaScript, C++, and more.
 2. **Programming Guides**: In-depth tutorials and best practices for popular programming languages and tools.
-3. **School Notes**: A collection of study materials and notes for different school subjects.
-4. **Contributions**: Contribute your own solutions, guides, or educational materials to Azure Core.
-5. **Azure Terminal**: A custom modular terminal.
+3. **Contributions**: Contribute your own solutions, guides, or educational materials to Azure Core.
+4. **Azure Terminal**: A custom modular terminal.
 
 ---
 
@@ -90,7 +88,7 @@ Join the Azure Core community on [Discord](https://discord.gg/CFnB9KvRJQ) to con
 
 ### 🎉 **License**
 
-Azure COre is licensed under the [MIT License](LICENSE).
+Azure Core is licensed under the [MIT License](LICENSE).
 
 ---
 
