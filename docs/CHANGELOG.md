@@ -14,6 +14,10 @@ All notable changes to this project will be documented in this file. This projec
 - Improved folder structure for better scalability.
 - Initial setup of the project documentation.
 
+## v1.0.0 - 19/03/2025 - Build#1
+### Changed
+- Updated [README.md](README.md).
+
 ---
 
 ### Note:
