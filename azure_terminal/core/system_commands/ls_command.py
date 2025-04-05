@@ -83,7 +83,7 @@ def display_help():
         Azure Terminal - Help
 ─────────────────────────────────────
 Command: ls
-Usage  : ls [OPTION]
+Usage  : ls <Option>
 Purpose: Lists files and directories in the current directory.
 
 Description:

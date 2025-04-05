@@ -37,6 +37,10 @@ All notable changes to Azure Terminal will be documented in this file. This proj
 ### Changed
 - Moved system command and custom module importing into the same program.
 
+# v1.2.2 - 05/04/2025 - Build#6
+### Added
+- `echo` system command.
+
 ---
 
 ### Note:

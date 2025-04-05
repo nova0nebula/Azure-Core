@@ -5,27 +5,27 @@ from system_library import Colour
 from azure_terminal.config.config_handler import prompt_colour, output_colour
 
 # System Command Execution
-def execute_quit(prompt):
+def execute_exit(prompt):
     parts: list = prompt.split(" ")
     if parts[-1] in ["help","-help"]:
         help_message = f"""─────────────────────────────────────
         Azure Terminal - Help
 ─────────────────────────────────────
-Command: quit
-Usage  : quit
+Command: exit
+Usage  : exit
 Purpose: Exits the Azure Terminal safely.
 
 Description:
-  The 'quit' command allows you to exit the terminal session.
+  The 'exit' command allows you to exit the terminal session.
   It ensures all processes are closed properly before exiting.
   
 Example:
-  {prompt_colour}azure-core${Colour.RESET} quit
+  {prompt_colour}azure-core${Colour.RESET} exit
   {output_colour}Exiting Azure Terminal...{Colour.RESET}
 
 Notes:
   - There are no additional arguments required.
-  - If you have unsaved work, make sure to save it before quitting.
+  - If you have unsaved work, make sure to save it before exiting.
 
 ─────────────────────────────────────"""
         print(help_message)
